@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./Header";
+import Work from "./Work";
+import { useCallback, useState } from "react";
+const DarkTheme=[{
+  backgroundColor :"white",
+  color:"blue",
+  fontFamily: "Oswald, sans-serif",
 
+},{
+  backgroundColor :" #121212",
+  color:"blue",
+  fontFamily: "Oswald, sans-serif",
+}]
 function App() {
+  const [theme,setTheme]=useState(false);
+  const Toggle= useCallback((e)=>{
+    setTheme(!theme)
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={DarkTheme[+theme]}>
+      <div className="Theme_control">
+        <Header Toggle={Toggle} theme={theme}/>
+        <Work />
+      </div>
     </div>
   );
 }
